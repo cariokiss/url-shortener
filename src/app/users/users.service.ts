@@ -18,14 +18,21 @@ export class UsersService {
         })
     }
 
-    async findOneOrFail(id: string) {
+    async findOneOrFailById(id: string) {
         try {
         return await this.usersRepository.findOneOrFail({where: {id}});   
     } catch (error) {
         throw new NotFoundException(error.message);
     }
-
   }
+
+  async findOneOrFailByEmail(email: string) {
+    try {
+      return await this.usersRepository.findOneOrFail({where: {email}});   
+  } catch (error) {
+      throw new NotFoundException(error.message);
+  }
+}
 
   async store(data: CreateUserDto) {
     const user = this.usersRepository.create(data);
@@ -33,7 +40,7 @@ export class UsersService {
   }
 
   async update(id: string, data: UpdateUserDto) {
-    const user = await this.findOneOrFail(id);
+    const user = await this.findOneOrFailById(id);
     this.usersRepository.merge(user, data);
     return await this.usersRepository.save(user);
   }

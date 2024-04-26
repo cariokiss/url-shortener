@@ -31,7 +31,7 @@ import {
   
     @Get(':id')
     async show(@Param('id', new ParseUUIDPipe()) id: string) {
-      return await this.usersService.findOneOrFail(id);
+      return await this.usersService.findOneOrFailById(id);
     }
   
     @Put(':id')
