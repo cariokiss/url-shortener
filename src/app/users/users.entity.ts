@@ -4,10 +4,12 @@ import {
     CreateDateColumn,
     DeleteDateColumn,
     Entity,
+    OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
   } from 'typeorm';
   import { hashSync } from 'bcrypt';
+import { SitesEntity } from '../sites/sites.entity';
   
   @Entity({ name: 'users' })
   export class UsersEntity {
@@ -25,6 +27,9 @@ import {
   
     @Column()
     password: string;
+
+    @OneToMany(() => SitesEntity, site => site.user)
+    sites: SitesEntity[];
   
     @CreateDateColumn({ name: 'created_at' })
     createdAt: string;
