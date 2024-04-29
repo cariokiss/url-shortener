@@ -14,11 +14,11 @@ export class SitesEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'site_entrada' })
-  siteEntrada: string;
+  @Column({ name: 'original_url' })
+  originalUrl: string;
 
-  @Column({ name: 'site_saida' })
-  siteSaida: string;
+  @Column({ name: 'shortened_url' })
+  shortenedUrl: string;
 
   @ManyToOne(() => UsersEntity, user => user.sites)
   user: UsersEntity;

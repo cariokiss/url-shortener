@@ -13,9 +13,18 @@ export class SitesService {
         private readonly sitesRepository: Repository<SitesEntity>,
     ) {}
 
-    generateSiteShortLink() {
-      return "temp"
-    }
+    generateSiteShortLink(): string {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      const alphanumericCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      const alphanumericLength = alphanumericCharacters.length;
+      let result = '';
+      for (let i = 0; i < 6; i++) { // Gerar uma string de 6 caracteres
+       const randomIndex = Math.floor(Math.random() * alphanumericLength);
+       result += alphanumericCharacters.charAt(randomIndex);
+  }
+  return result;
+}
+    
 
     async findAll(user: UsersEntity) {
       console.log(user)
@@ -33,10 +42,10 @@ export class SitesService {
     }
   }
 
-  async findOneOrFailBySite(siteSaida: string) {
+  async findOneOrFailBySite(shortenedUrl: string) {
     try {
-    const result = await this.sitesRepository.findOneOrFail({where: {siteSaida}});   
-    return result.siteEntrada
+    const result = await this.sitesRepository.findOneOrFail({where: {shortenedUrl}});   
+    return result.originalUrl
 } catch (error) {
     throw new NotFoundException(error.message);
 }
@@ -46,7 +55,7 @@ export class SitesService {
     const siteToCreate = {
       ...data,
       user,
-      siteSaida: this.generateSiteShortLink()
+      shortenedUrl: this.generateSiteShortLink()
     }
     const site = this.sitesRepository.create(siteToCreate);
     return await this.sitesRepository.save(site);
@@ -54,8 +63,9 @@ export class SitesService {
 
   async update(id: string, data: UpdateSiteDto) {
     const site = await this.findOneOrFailById(id);
-    this.sitesRepository.merge(site);
-    return await this.sitesRepository.save(site);
+    site.originalUrl = data.originalUrl;
+    await this.sitesRepository.save(site);
+    return site;
   }
 
   async destroy(id: string) {
