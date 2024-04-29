@@ -20,6 +20,9 @@ export class SitesEntity {
   @Column({ name: 'shortened_url' })
   shortenedUrl: string;
 
+  @Column({ default: 0 }) // Inicializa o contador de visualizações como 0
+  views: number;
+
   @ManyToOne(() => UsersEntity, user => user.sites)
   user: UsersEntity;
 

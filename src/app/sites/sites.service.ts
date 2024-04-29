@@ -24,7 +24,6 @@ export class SitesService {
   }
   return result;
 }
-    
 
     async findAll(user: UsersEntity) {
       console.log(user)
@@ -44,8 +43,13 @@ export class SitesService {
 
   async findOneOrFailBySite(shortenedUrl: string) {
     try {
-    const result = await this.sitesRepository.findOneOrFail({where: {shortenedUrl}});   
-    return result.originalUrl
+    const site = await this.sitesRepository.findOneOrFail({where: {shortenedUrl}});   
+    if (site) {
+      site.views += 1; // Incrementa o contador de visualizações
+      console.log(site)
+      await this.sitesRepository.save(site);
+  }
+    return site.originalUrl
 } catch (error) {
     throw new NotFoundException(error.message);
 }
