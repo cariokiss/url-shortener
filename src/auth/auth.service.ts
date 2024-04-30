@@ -3,6 +3,7 @@ import { UsersEntity } from '../app/users/users.entity';
 import { UsersService } from '../app/users/users.service';
 import { compareSync } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { ApiOperation } from '@nestjs/swagger';
 
 @Injectable()
 export class AuthService {
@@ -11,6 +12,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
+  @ApiOperation({ summary: 'Realiza o login do usuário e gera um token JWT' })
   async login(user) {
     const payload = { sub: user.id, email: user.email };
 
@@ -19,6 +21,7 @@ export class AuthService {
     };
   }
 
+  @ApiOperation({ summary: 'Valida as credenciais do usuário' })
   async validateUser(email: string, password: string) {
     let user: UsersEntity;
     try {

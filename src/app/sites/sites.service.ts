@@ -14,7 +14,6 @@ export class SitesService {
     ) {}
 
     generateSiteShortLink(): string {
-      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
       const alphanumericCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
       const alphanumericLength = alphanumericCharacters.length;
       let result = '';
@@ -26,7 +25,6 @@ export class SitesService {
 }
 
     async findAll(user: UsersEntity) {
-      console.log(user)
         return await this.sitesRepository.find({
           where: {user},
           relations: ['user']
@@ -46,7 +44,6 @@ export class SitesService {
     const site = await this.sitesRepository.findOneOrFail({where: {shortenedUrl}});   
     if (site) {
       site.views += 1; // Incrementa o contador de visualizações
-      console.log(site)
       await this.sitesRepository.save(site);
   }
     return site.originalUrl

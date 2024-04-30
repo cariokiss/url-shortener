@@ -1,9 +1,3 @@
-// update-site.dto.ts
-import { IsString, IsNotEmpty, IsUUID } from 'class-validator';
+import { CreateSiteDto } from "./create-site.dto";
 
-export class UpdateSiteDto {
-
-    @IsString()
-    @IsNotEmpty()
-    originalUrl: string;
-}
+export class UpdateSiteDto extends CreateSiteDto {}

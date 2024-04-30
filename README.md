@@ -5,7 +5,7 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+  <p align="center">Uma estrutura <a href="http://nodejs.org" target="_blank">Node.js</a> progressiva para criar aplicativos do lado do servidor eficientes e escaláveis.</p>
     <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
@@ -22,17 +22,17 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## Descrição
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+[Nest](https://github.com/nestjs/nest) repositório inicial TypeScript da estrutura.
 
-## Installation
+## Instalação
 
 ```bash
 $ npm install
 ```
 
-## Running the app
+## Executando o aplicativo
 
 ```bash
 # development
@@ -45,7 +45,7 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## Teste
 
 ```bash
 # unit tests
@@ -58,16 +58,130 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+## Suporte
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Nest é um projeto de código aberto licenciado pelo MIT. Pode crescer graças aos patrocinadores e ao apoio de patrocinadores incríveis. Se você quiser se juntar a eles, [leia mais aqui](https://docs.nestjs.com/support).
 
-## Stay in touch
+## Contatos
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
+- Autor - [Kamil Myśliwiec](https://kamilmysliwiec.com)
+- Site - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework)
 
-## License
+## Licença
 
-Nest is [MIT licensed](LICENSE).
+Nest é [licenciado pelo MIT](LICENÇA).
+
+## Sobre
+
+Esse sistema foi criado com o objetivo de encurtar URLs transformando-as em URLs curtas de 6 caracteres.
+
+## Rotas
+
+O sistema está devidamento documentado com o Swagger, entretanto segue abaixo as rotas de acesso:
+
+- Criar usuário
+
+http://localhost:3000/users
+
+{
+
+	"firstName": "Victor",
+	"lastName": "Ozoterio",
+	"email": "example@gmail.com",
+	"password": "Senha@123"
+
+}
+
+- Login
+
+http://localhost:3000/auth/login
+
+{
+
+	"email": "example@gmail.com",
+	"password": "Senha@123"
+
+}
+
+- Atualizar usuário
+
+http://localhost:3000/users/{id}
+
+{
+
+	"firstName": "Vitor",
+	"lastName": "Ferreira"
+
+}
+
+- Exibir ou deletar usuário
+
+http://localhost:3000/users/{id}
+
+{
+
+    ...
+
+}
+
+- Criar URL encurtada anonimamente
+
+http://localhost:3000
+
+{
+
+    "originalUrl": "https://websiteexample.com"
+
+}
+
+- Criar URL encurtada com usuário
+
+http://localhost:3000/sites
+
+{
+
+    "originalUrl": "https://websiteexample.com"
+
+}
+
+- Atualizar origem da URL encurtada
+
+http://localhost:3000/sites/{id}
+
+{
+
+	"originalUrl": "https://examplewebsite.com"
+
+}
+
+- Exibir ou deletar URL encurtada
+
+http://localhost:3000/sites/{id}
+
+{
+
+    ...
+
+}
+
+- Ir para o site através da URL encurtada
+
+http://localhost:3000/{shortURL}
+
+
+## Prazos e Entregas
+
+| Tarefas       | Estimativa          | Realizado          |
+| --------------- | ----------------- | ----------------- |
+| Sistema de usuários | 2h | 2h |
+| Fortificação e criptografia da senha | 3h | 2h |
+| Sistema de login | 3h | 2h |
+| Autenticação com Bearer Token | 3h | 2h |
+| Sistema de sites | 3h | 2h |
+| Lógica encurtar URL  | 1h | 40min |
+| Relacionar usuários e sites | 2h | 1h:30 |
+| Lógica redirecionar site  | 1h | 40min |
+| Lógica contabilizar views | 1h:30 | 1h |
+| Definir rotas públicas e privadas | 2h | 1h:30 |
+| Documentação com Swagger | 2h:30 | 2h |
